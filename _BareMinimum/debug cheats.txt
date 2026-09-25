@@ -1,0 +1,6 @@
+//1. Click Serial Monitor magnifiying class in top right of Arduino 1.8.19 IDE
+//2. Set baud to 115200 in correct COM. 
+
+
+  Serial.begin(115200);
+  Serial.println("setup() called");
