@@ -23,65 +23,65 @@ void loop()
   pinMode(intGreen,OUTPUT);
   Serial.println("Decimal number 0");
   digitalWrite(intRed,LOW); digitalWrite(intYellow,LOW); digitalWrite(intBlue,LOW); digitalWrite(intGreen,LOW);
-  delay(intDelay);;
+  delay(intDelay);
 
   Serial.println("Decimal number 1");
   digitalWrite(intRed,LOW); digitalWrite(intYellow,LOW); digitalWrite(intBlue,LOW); digitalWrite(intGreen,HIGH);
-  delay(intDelay);;
+  delay(intDelay);
 
   Serial.println("Decimal number 2");
   digitalWrite(intRed,LOW); digitalWrite(intYellow,LOW); digitalWrite(intBlue,HIGH); digitalWrite(intGreen,HIGH);
-  delay(intDelay);;
+  delay(intDelay);
 
   Serial.println("Decimal number 3"); 
   digitalWrite(intRed,LOW); digitalWrite(intYellow,LOW); digitalWrite(intBlue,HIGH); digitalWrite(intGreen,HIGH);
-  delay(intDelay);;
+  delay(intDelay);
 
   Serial.println("Decimal number 4");
   digitalWrite(intRed,LOW); digitalWrite(intYellow,HIGH); digitalWrite(intBlue,LOW); digitalWrite(intGreen,LOW);
-  delay(intDelay);;
+  delay(intDelay);
 
   Serial.println("Decimal number 5");
   digitalWrite(intRed, LOW); digitalWrite(intYellow, HIGH); digitalWrite(intBlue, LOW); digitalWrite(intGreen, HIGH);
-  delay(intDelay);;
+  delay(intDelay);
   
   Serial.println("Decimal number 6");
   digitalWrite(intRed, LOW); digitalWrite(intYellow, HIGH); digitalWrite(intBlue, HIGH); digitalWrite(intGreen, LOW);
-  delay(intDelay);;
+  delay(intDelay);
   
   Serial.println("Decimal number 7");
   digitalWrite(intRed, LOW); digitalWrite(intYellow, HIGH); digitalWrite(intBlue, HIGH); digitalWrite(intGreen, HIGH);
-  delay(intDelay);;
+  delay(intDelay);
   
   Serial.println("Decimal number 8");
   digitalWrite(intRed, HIGH); digitalWrite(intYellow, LOW); digitalWrite(intBlue, LOW); digitalWrite(intGreen, LOW);
-  delay(intDelay);;
+  delay(intDelay);
   
   Serial.println("Decimal number 9");
   digitalWrite(intRed, HIGH); digitalWrite(intYellow, LOW); digitalWrite(intBlue, LOW); digitalWrite(intGreen, HIGH);
-  delay(intDelay);;
+  delay(intDelay);
   
   Serial.println("Decimal number 10");
   digitalWrite(intRed, HIGH); digitalWrite(intYellow, LOW); digitalWrite(intBlue, HIGH); digitalWrite(intGreen, LOW);
-  delay(intDelay);;
+  delay(intDelay);
   
   Serial.println("Decimal number 11");
   digitalWrite(intRed, HIGH); digitalWrite(intYellow, LOW); digitalWrite(intBlue, HIGH); digitalWrite(intGreen, HIGH);
-  delay(intDelay);;
+  delay(intDelay);
   
   Serial.println("Decimal number 12");
   digitalWrite(intRed, HIGH); digitalWrite(intYellow, HIGH); digitalWrite(intBlue, LOW); digitalWrite(intGreen, LOW);
-  delay(intDelay);;
+  delay(intDelay);
   
   Serial.println("Decimal number 13");
   digitalWrite(intRed, HIGH); digitalWrite(intYellow, HIGH); digitalWrite(intBlue, LOW); digitalWrite(intGreen, HIGH);
-  delay(intDelay);;
+  delay(intDelay);
   
   Serial.println("Decimal number 14");
   digitalWrite(intRed, HIGH); digitalWrite(intYellow, HIGH); digitalWrite(intBlue, HIGH); digitalWrite(intGreen, LOW);
-  delay(intDelay);;
+  delay(intDelay);
   
   Serial.println("Decimal number 15");
   digitalWrite(intRed, HIGH); digitalWrite(intYellow, HIGH); digitalWrite(intBlue, HIGH); digitalWrite(intGreen, HIGH);
-  delay(intDelay);;
+  delay(intDelay);
 }
