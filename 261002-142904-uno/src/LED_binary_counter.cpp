@@ -41,10 +41,10 @@ void loop()
 
   for (int i = 0; i < 16; i++)
   {
-    _intBlue  = (i >> 0) & 1; // 1
-    _intYellow = (i >> 1) & 1; // 0
-    _intOrange  = (i >> 2) & 1; // 1
-    _intGreen = (i >> 3) & 1; // 1
+    int first  = (i >> 0) & 1; // 1
+    int second = (i >> 1) & 1; // 0
+    int third  = (i >> 2) & 1; // 1
+    int forth = (i >> 3) & 1; // 1
   }
   Serial.println("Decimal number 0");//✔
   digitalWrite(_intBlue,LOW); digitalWrite(_intYellow,LOW); digitalWrite(_intOrange,LOW); digitalWrite(_intGreen,LOW);
