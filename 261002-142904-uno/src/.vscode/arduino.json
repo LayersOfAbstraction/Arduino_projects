@@ -1,6 +1,0 @@
-{
-    "port": "COM11",
-    "board": "arduino:avr:uno",
-    "programmer": "arduino:arduinoisporg",
-    "sketch": "LED_binary_counter.ino"
-}
