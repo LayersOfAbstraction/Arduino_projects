@@ -18,10 +18,15 @@ void setup() {
 void wait_for_serial()
 {
   Serial.println("before wait serial");
+  uint32_t last = millis();
   while (!Serial.available())
   {
-    Serial.println("waiting for serial");
-    delay(1000);
+    if ((millis() - last) > 10000)
+    {
+      Serial.println("waiting for serial");
+      last = millis();
+    }
+    delay(100);
   };
 
   // Read everything from serial
@@ -32,81 +37,18 @@ void wait_for_serial()
 
 void loop() 
 {
-  // put your main code here, to run repeatedly:
-  /*HOME WORK
-  * For part 5 ensure you create a counter that counts 0 to 15.
-  * Get the following Objects:
-  * Get _intBlue, _intYellow _intOrange and _intGreen LEDs.
-  */   
-
   for (int i = 0; i < 16; i++)
   {
-    int first  = (i >> 0) & 1; // 1
-    int second = (i >> 1) & 1; // 0
-    int third  = (i >> 2) & 1; // 1
-    int forth = (i >> 3) & 1; // 1
-  }
-  Serial.println("Decimal number 0");//✔
-  digitalWrite(_intBlue,LOW); digitalWrite(_intYellow,LOW); digitalWrite(_intOrange,LOW); digitalWrite(_intGreen,LOW);
-  wait_for_serial();
+    int intFirst  = (i >> 0) & 1;
+    int intSecond = (i >> 1) & 1;
+    int intThird  = (i >> 2) & 1;
+    int intForth = (i >> 3) & 1; 
 
-  Serial.println("Decimal number 1");//✔
-  digitalWrite(_intBlue,LOW); digitalWrite(_intYellow,LOW); digitalWrite(_intOrange,LOW); digitalWrite(_intGreen,HIGH);
-  wait_for_serial();
 
-  Serial.println("Decimal number 2");//✔
-  digitalWrite(_intBlue,LOW); digitalWrite(_intYellow,LOW); digitalWrite(_intOrange,HIGH); digitalWrite(_intGreen,LOW);
-  wait_for_serial();
-
-  Serial.println("Decimal number 3");////❌
-  digitalWrite(_intBlue,LOW); digitalWrite(_intYellow,LOW); digitalWrite(_intOrange,HIGH); digitalWrite(_intGreen,HIGH);
-  wait_for_serial();
-
-  Serial.println("Decimal number 4");//❌
-  digitalWrite(_intBlue,LOW), digitalWrite(_intYellow,HIGH); digitalWrite(_intOrange,LOW); digitalWrite(_intGreen,LOW); 
-  wait_for_serial();
-
-  Serial.println("Decimal number 5");
-  digitalWrite(_intBlue,LOW); digitalWrite(_intYellow,HIGH); digitalWrite(_intOrange,LOW); digitalWrite(_intGreen,HIGH);
-  wait_for_serial();
-  
-  Serial.println("Decimal number 6");
-  digitalWrite(_intBlue,LOW); digitalWrite(_intYellow,HIGH); digitalWrite(_intOrange,HIGH); digitalWrite(_intGreen,LOW);
-  wait_for_serial();
-  
-  Serial.println("Decimal number 7");
-  digitalWrite(_intBlue,LOW); digitalWrite(_intYellow,HIGH); digitalWrite(_intOrange,HIGH); digitalWrite(_intGreen,HIGH);
-  wait_for_serial();
-  
-  Serial.println("Decimal number 8");
-  digitalWrite(_intBlue,HIGH); digitalWrite(_intYellow,LOW); digitalWrite(_intOrange,LOW); digitalWrite(_intGreen,LOW);
-  wait_for_serial();
-  
-  Serial.println("Decimal number 9");
-  digitalWrite(_intBlue,HIGH); digitalWrite(_intYellow,LOW); digitalWrite(_intOrange,LOW); digitalWrite(_intGreen,HIGH);
-  wait_for_serial();
-  
-  Serial.println("Decimal number 10");
-  digitalWrite(_intBlue,HIGH); digitalWrite(_intYellow,LOW); digitalWrite(_intOrange,HIGH); digitalWrite(_intGreen,LOW);
-  wait_for_serial();
-  
-  Serial.println("Decimal number 11");
-  digitalWrite(_intBlue,HIGH); digitalWrite(_intYellow,LOW); digitalWrite(_intOrange,HIGH); digitalWrite(_intGreen,HIGH);
-  wait_for_serial();
-  
-  Serial.println("Decimal number 12");
-  digitalWrite(_intBlue,HIGH); digitalWrite(_intYellow,HIGH); digitalWrite(_intOrange,LOW); digitalWrite(_intGreen,LOW);
-  wait_for_serial();
-  
-  Serial.println("Decimal number 13");
-  digitalWrite(_intBlue,HIGH); digitalWrite(_intYellow,HIGH); digitalWrite(_intOrange,LOW); digitalWrite(_intGreen,HIGH);
-  wait_for_serial();
-  
-  Serial.println("Decimal number 14");
-  digitalWrite(_intBlue,HIGH); digitalWrite(_intYellow,HIGH); digitalWrite(_intOrange,HIGH); digitalWrite(_intGreen,LOW);
-  wait_for_serial();
-  
-  Serial.println("Decimal number 15");
-  digitalWrite(_intBlue,HIGH); digitalWrite(_intYellow,HIGH); digitalWrite(_intOrange,HIGH); digitalWrite(_intGreen,HIGH);
-  wait_for_serial();
+    Serial.println(" Decimal number: " + String(i));
+    //Prints the binary repesentation of 4 bits.
+    Serial.print(intFirst); Serial.print(" "); Serial.print(intSecond); Serial.print(" "); Serial.print(intThird); Serial.print(" "); Serial.println(intForth); 
+    digitalWrite(_intBlue,intFirst); digitalWrite(_intYellow,intSecond); digitalWrite(_intOrange,intThird); digitalWrite(_intGreen,intForth);
+    wait_for_serial();
+  } 
 }
