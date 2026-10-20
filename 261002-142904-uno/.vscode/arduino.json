@@ -1,5 +1,5 @@
 {
-    "port": "COM11",
+    "port": "/dev/ttyUSB0",
     "board": "arduino:avr:uno",
     "programmer": "arduino:avrisp"
 }
