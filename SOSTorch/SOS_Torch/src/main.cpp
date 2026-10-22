@@ -1,11 +1,22 @@
+//FURTHER READING: https://roboticsbackend.com/arduino-handle-multiple-leds-using-arrays-and-functions/
 #include <Arduino.h>
 
-int _intCounter = 0;
+#pragma region "Variables and arrays"
+const byte _intLED = 5;
 
-int _intArrLEDPins[5] = {3,4,5,6,7};
+byte _intArrLEDPins[_intLED] = {3,4,5,6,7};
 
-int shorter = 50;
-int longer = 150;
+int _intShorter = 50;
+int _intlonger = 150;
+#pragma endregion "Variables and arrays"
+
+#pragma region "Functions"
+void initAllLEDs()
+{
+  for (int i = 0; i < _intLED; i++) {
+    pinMode(_intArrLEDPins[i], OUTPUT);
+  }
+}
 
 void wait_for_serial()
 {
@@ -20,37 +31,63 @@ void wait_for_serial()
   String s = Serial.readString();
   Serial.print("Read from serial:"); Serial.println(s);
 }
+#pragma endregion "Functions"
 
 void setup() {
   // put your setup code here, to run once:
-  pinMode(_intArrLEDPins[0], OUTPUT);
-  pinMode(_intArrLEDPins[1], OUTPUT);
-  pinMode(_intArrLEDPins[2], OUTPUT);
-  pinMode(_intArrLEDPins[3], OUTPUT);
-  pinMode(_intArrLEDPins[4], OUTPUT);
+  initAllLEDs();
 }
 
 void loop() {
   // put your main code here, to run repeatedly:
 
-//SHORT 1
     for (int i = 3; i >= 1; i--)
     { 
-      //This loop may not be needed. We need all lit up.
-      for (int x = _intArrLEDPins[_intCounter]; x <= _intArrLEDPins[_intCounter]; x++)
-      {
         //If short light has blinked 3 times
-        if (shorter != 0)
+        if (_intShorter != 0)
+        {          
           digitalWrite(_intArrLEDPins[0],HIGH);
           digitalWrite(_intArrLEDPins[1],HIGH);
           digitalWrite(_intArrLEDPins[2],HIGH);
           digitalWrite(_intArrLEDPins[3],HIGH);
           digitalWrite(_intArrLEDPins[4],HIGH);
+          delay(_intShorter);
+          digitalWrite(_intArrLEDPins[0],LOW);
+          digitalWrite(_intArrLEDPins[1],LOW);
+          digitalWrite(_intArrLEDPins[2],LOW);
+          digitalWrite(_intArrLEDPins[3],LOW);
+          digitalWrite(_intArrLEDPins[4],LOW);
+          delay(_intShorter);
+        }
+
+        else if(_intlonger != 0)
+        {
+          int PinCounter;
+          while(PinCounter < 4)
+          {
+            digitalWrite(_intArrLEDPins[PinCounter],HIGH);
+            PinCounter++;
+            delay(_intlonger);
+
+          }
+          
+          digitalWrite(_intArrLEDPins[0],HIGH);
+          digitalWrite(_intArrLEDPins[1],HIGH);
+          digitalWrite(_intArrLEDPins[2],HIGH);
+          digitalWrite(_intArrLEDPins[3],HIGH);
+          digitalWrite(_intArrLEDPins[4],HIGH);
+          delay(_intShorter);
+          digitalWrite(_intArrLEDPins[0],LOW);
+          digitalWrite(_intArrLEDPins[1],LOW);
+          digitalWrite(_intArrLEDPins[2],LOW);
+          digitalWrite(_intArrLEDPins[3],LOW);
+          digitalWrite(_intArrLEDPins[4],LOW);
           Serial.println("1st Short count complete.");
+        }
       }
 
 
-      delay(shorter);
+      
       digitalWrite(2,LOW);
       delay(shorter);
     }
