@@ -1,12 +1,8 @@
 #include <Arduino.h>
 
-int _intArrLEDPins[5] = {3,4,5,6,7};
+int _intCounter = 0;
 
-// int whiteLED_Three = 3;
-// int whiteLED_Four = 4;
-// int whiteLED_Five = 5;
-// int whiteLED_Six = 6;
-// int whiteLED_Seven = 7;
+int _intArrLEDPins[5] = {3,4,5,6,7};
 
 int shorter = 50;
 int longer = 150;
@@ -40,11 +36,23 @@ void loop() {
 //SHORT 1
     for (int i = 3; i >= 1; i--)
     { 
-      Serial.println("1st Short Count: " + i);
-      digitalWrite(2,HIGH);
-      delay(550);
+      //This loop may not be needed. We need all lit up.
+      for (int x = _intArrLEDPins[_intCounter]; x <= _intArrLEDPins[_intCounter]; x++)
+      {
+        //If short light has blinked 3 times
+        if (shorter != 0)
+          digitalWrite(_intArrLEDPins[0],HIGH);
+          digitalWrite(_intArrLEDPins[1],HIGH);
+          digitalWrite(_intArrLEDPins[2],HIGH);
+          digitalWrite(_intArrLEDPins[3],HIGH);
+          digitalWrite(_intArrLEDPins[4],HIGH);
+          Serial.println("1st Short count complete.");
+      }
+
+
+      delay(shorter);
       digitalWrite(2,LOW);
-      delay(550);
+      delay(shorter);
     }
 
   digitalWrite(whiteLED_Three,HIGH);
