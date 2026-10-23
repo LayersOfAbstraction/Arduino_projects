@@ -1,16 +1,16 @@
 //FURTHER READING: https://roboticsbackend.com/arduino-handle-multiple-leds-using-arrays-and-functions/
 #include <Arduino.h>
 
-#pragma GCC region "Variables and arrays"
+#if 1  // #pragma region "Variables and arrays"
 /// @brief Total elements array is to contain.
 const byte _intLED = 5;
 
 /// @brief Each digit refers to pin ID on the UNO. 
 byte _intArrLEDPins[_intLED] = {2,3,4,5,6};
 
-#pragma GCC endregion "Variables and arrays"
+#endif // #pragma endregion "Variables and arrays"
 
-#pragma GCC region "Functions"
+#if 1  // #pragma region "Functions"
 
 /// @brief Sets all LEDS to OUTPUT.
 void initAllLEDs()
@@ -72,9 +72,9 @@ void powerOnAllLEDs(bool bolPowerOn)
     }    
   }
 }
-#pragma GCC endregion "Functions"
+#endif // #pragma endregion "Functions"
 
-#pragma GCC region "Default Events"
+#if 1  // #pragma region "Default Events"
 void setup() {
   // put your setup code here, to run once:
   initAllLEDs();
@@ -87,4 +87,4 @@ void loop() {
   powerOnAllLEDs(false);
   wait_for_serial();
 }      
-#pragma GCC endregion "Default Events"
+#endif // #pragma endregion "Default Events"
