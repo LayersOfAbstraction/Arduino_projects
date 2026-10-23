@@ -1,16 +1,18 @@
 //FURTHER READING: https://roboticsbackend.com/arduino-handle-multiple-leds-using-arrays-and-functions/
 #include <Arduino.h>
 
-#pragma region "Variables and arrays"
+#pragma GCC region "Variables and arrays"
+/// @brief Total elements array is to contain.
 const byte _intLED = 5;
 
-byte _intArrLEDPins[_intLED] = {3,4,5,6,7};
+/// @brief Each digit refers to pin ID on the UNO. 
+byte _intArrLEDPins[_intLED] = {2,3,4,5,6};
 
-int _intShorter = 50;
-int _intlonger = 150;
-#pragma endregion "Variables and arrays"
+#pragma GCC endregion "Variables and arrays"
 
-#pragma region "Functions"
+#pragma GCC region "Functions"
+
+/// @brief Sets all LEDS to OUTPUT.
 void initAllLEDs()
 {
   for (int i = 0; i < _intLED; i++) {
@@ -18,6 +20,7 @@ void initAllLEDs()
   }
 }
 
+/// @brief Pauses the code to analyse in Serial Monitor.
 void wait_for_serial()
 {
   Serial.println("before wait serial");
@@ -29,10 +32,49 @@ void wait_for_serial()
 
   // Read everything from serial
   String s = Serial.readString();
-  Serial.print("Read from serial:"); Serial.println(s);
+  Serial.print("Read from serial:"); Serial.println(s);  
 }
-#pragma endregion "Functions"
 
+/// @brief Controls long & short signals of all LEDs
+/// @param bolPowerOn Checks if LED High or Low. 
+void powerOnAllLEDs(bool bolPowerOn)
+{
+  int intShorter = 50;
+  int intlonger = 150;
+  //SHORT signal
+  for (int i = 0; i < _intLED; i++) 
+  {
+    if (bolPowerOn) 
+    {
+      digitalWrite(_intArrLEDPins[i], HIGH);
+      delay(intShorter);
+    }
+
+    else 
+    {
+      digitalWrite(_intArrLEDPins[i], LOW);
+      delay(intShorter);
+    }    
+  }
+  //LONG signal
+  for (int i = 0; i < _intLED; i++) 
+  {
+    if (bolPowerOn) 
+    {
+      digitalWrite(_intArrLEDPins[i], HIGH);
+      delay(intlonger);
+    }
+    
+    else 
+    {
+      digitalWrite(_intArrLEDPins[i], LOW);
+      delay(intlonger);
+    }    
+  }
+}
+#pragma GCC endregion "Functions"
+
+#pragma GCC region "Default Events"
 void setup() {
   // put your setup code here, to run once:
   initAllLEDs();
@@ -40,121 +82,9 @@ void setup() {
 
 void loop() {
   // put your main code here, to run repeatedly:
-
-    for (int i = 3; i >= 1; i--)
-    { 
-        //If short light has blinked 3 times
-        if (_intShorter != 0)
-        {          
-          digitalWrite(_intArrLEDPins[0],HIGH);
-          digitalWrite(_intArrLEDPins[1],HIGH);
-          digitalWrite(_intArrLEDPins[2],HIGH);
-          digitalWrite(_intArrLEDPins[3],HIGH);
-          digitalWrite(_intArrLEDPins[4],HIGH);
-          delay(_intShorter);
-          digitalWrite(_intArrLEDPins[0],LOW);
-          digitalWrite(_intArrLEDPins[1],LOW);
-          digitalWrite(_intArrLEDPins[2],LOW);
-          digitalWrite(_intArrLEDPins[3],LOW);
-          digitalWrite(_intArrLEDPins[4],LOW);
-          delay(_intShorter);
-        }
-
-        else if(_intlonger != 0)
-        {
-          int PinCounter;
-          while(PinCounter < 4)
-          {
-            digitalWrite(_intArrLEDPins[PinCounter],HIGH);
-            PinCounter++;
-            delay(_intlonger);
-
-          }
-          
-          digitalWrite(_intArrLEDPins[0],HIGH);
-          digitalWrite(_intArrLEDPins[1],HIGH);
-          digitalWrite(_intArrLEDPins[2],HIGH);
-          digitalWrite(_intArrLEDPins[3],HIGH);
-          digitalWrite(_intArrLEDPins[4],HIGH);
-          delay(_intShorter);
-          digitalWrite(_intArrLEDPins[0],LOW);
-          digitalWrite(_intArrLEDPins[1],LOW);
-          digitalWrite(_intArrLEDPins[2],LOW);
-          digitalWrite(_intArrLEDPins[3],LOW);
-          digitalWrite(_intArrLEDPins[4],LOW);
-          Serial.println("1st Short count complete.");
-        }
-      }
-
-
-      
-      digitalWrite(2,LOW);
-      delay(shorter);
-    }
-
-  digitalWrite(whiteLED_Three,HIGH);
-  delay(shorter);
-  digitalWrite(whiteLED_Three, LOW);
-  delay(shorter);
-
-//SHORT 2
-  digitalWrite(whiteLED_Three,HIGH);
-  delay(shorter);
-  digitalWrite(whiteLED_Three, LOW);
-  delay(shorter);
-
-//SHORT 3
-  digitalWrite(whiteLED_Three,HIGH);
-  delay(shorter);
-  digitalWrite(whiteLED_Three, LOW);
-  delay(shorter);
-//LONG 1
-  digitalWrite(whiteLED_Three,HIGH);
-  delay(longer);
-  digitalWrite(whiteLED_Three, LOW);
-  delay(longer);
-
-//LONG 2
-  digitalWrite(whiteLED_Three,HIGH);
-  delay(longer);
-  digitalWrite(whiteLED_Three, LOW);
-  delay(longer);
-//LONG 3
-  digitalWrite(whiteLED_Three,HIGH);
-  delay(longer);
-  digitalWrite(whiteLED_Three, LOW);
-  delay(longer);
-//SHORT 1
-  digitalWrite(whiteLED_Three,HIGH);
-  delay(shorter);
-  digitalWrite(whiteLED_Three, LOW);
-  delay(shorter);
-
-//SHORT 2
-  digitalWrite(whiteLED_Three,HIGH);
-  delay(shorter);
-  digitalWrite(whiteLED_Three, LOW);
-  delay(shorter);
-
-//SHORT 3
-  digitalWrite(whiteLED_Three,HIGH);
-  delay(shorter);
-  digitalWrite(whiteLED_Three, LOW);
-  delay(shorter);  
+  powerOnAllLEDs(true);
   wait_for_serial();
-
-//STUB: Condence SOS logic.
-//GET pins 1 to 5.
-//SOS_ShortCounter=3.
-//SOS_LongCounter=3.
-
-//FOR i = 0; i < SOS_ShortCounter;i++;
-//SHORT 1
-// LED ARRAY??? 
-
-
-//LONG 2
-//SHORT 3
-
-
-}
+  powerOnAllLEDs(false);
+  wait_for_serial();
+}      
+#pragma GCC endregion "Default Events"
