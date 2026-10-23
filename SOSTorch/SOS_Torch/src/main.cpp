@@ -1,5 +1,6 @@
 //FURTHER READING: https://roboticsbackend.com/arduino-handle-multiple-leds-using-arrays-and-functions/
 #include <Arduino.h>
+// #define WOKWI_DEBUGGER 1
 
 #if 1  // #pragma region "Variables and arrays"
 /// @brief Total elements array is to contain.
@@ -21,19 +22,21 @@ void initAllLEDs()
 }
 
 /// @brief Pauses the code to analyse in Serial Monitor.
-void wait_for_serial()
-{
-  Serial.println("before wait serial");
-  while (!Serial.available())
-  {
-    Serial.println("waiting for serial");
-    delay(1000);
-  };
+// void wait_for_serial()
+// {
+//   #if WOKWI_DEBUGGER == 0  // Skip serial during debugging. Set to 1 to enable serial
+//   Serial.println("before wait serial");
+//   while (!Serial.available())
+//   {
+//     Serial.println("waiting for serial");
+//     delay(1000);
+//   };
 
-  // Read everything from serial
-  String s = Serial.readString();
-  Serial.print("Read from serial:"); Serial.println(s);  
-}
+//   // Read everything from serial
+//   String s = Serial.readString();
+//   Serial.print("Read from serial:"); Serial.println(s);
+//   #endif  
+// }
 
 /// @brief Controls long & short signals of all LEDs
 /// @param bolPowerOn Checks if LED High or Low. 
@@ -83,8 +86,8 @@ void setup() {
 void loop() {
   // put your main code here, to run repeatedly:
   powerOnAllLEDs(true);
-  wait_for_serial();
+//  wait_for_serial();
   powerOnAllLEDs(false);
-  wait_for_serial();
+//  wait_for_serial();
 }      
 #endif // #pragma endregion "Default Events"

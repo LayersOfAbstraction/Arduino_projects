@@ -1,0 +1,125 @@
+{
+  "version": 1,
+  "author": "Arduino LED Array Debug",
+  "title": "LED Array Debug Circuit (Arduino Uno)",
+  "editor": "wokwi",
+  "parts": [
+    {
+      "type": "wokwi-arduino-uno",
+      "id": "uno",
+      "top": 0,
+      "left": 0
+    },
+    {
+      "type": "wokwi-led",
+      "id": "led1",
+      "top": 100,
+      "left": 350,
+      "attrs": {
+        "color": "red"
+      }
+    },
+    {
+      "type": "wokwi-led",
+      "id": "led2",
+      "top": 150,
+      "left": 350,
+      "attrs": {
+        "color": "red"
+      }
+    },
+    {
+      "type": "wokwi-led",
+      "id": "led3",
+      "top": 200,
+      "left": 350,
+      "attrs": {
+        "color": "red"
+      }
+    },
+    {
+      "type": "wokwi-led",
+      "id": "led4",
+      "top": 250,
+      "left": 350,
+      "attrs": {
+        "color": "red"
+      }
+    },
+    {
+      "type": "wokwi-led",
+      "id": "led5",
+      "top": 300,
+      "left": 350,
+      "attrs": {
+        "color": "red"
+      }
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "r1",
+      "top": 100,
+      "left": 200,
+      "attrs": {
+        "value": "220"
+      }
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "r2",
+      "top": 150,
+      "left": 200,
+      "attrs": {
+        "value": "220"
+      }
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "r3",
+      "top": 200,
+      "left": 200,
+      "attrs": {
+        "value": "220"
+      }
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "r4",
+      "top": 250,
+      "left": 200,
+      "attrs": {
+        "value": "220"
+      }
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "r5",
+      "top": 300,
+      "left": 200,
+      "attrs": {
+        "value": "220"
+      }
+    }
+  ],
+  "connections": [
+    ["uno", "2", "r1", "1"],
+    ["r1", "2", "led1", "a"],
+    ["led1", "c", "uno", "GND.1"],
+    
+    ["uno", "3", "r2", "1"],
+    ["r2", "2", "led2", "a"],
+    ["led2", "c", "uno", "GND.2"],
+    
+    ["uno", "4", "r3", "1"],
+    ["r3", "2", "led3", "a"],
+    ["led3", "c", "uno", "GND.3"],
+    
+    ["uno", "5", "r4", "1"],
+    ["r4", "2", "led4", "a"],
+    ["led4", "c", "uno", "GND.4"],
+    
+    ["uno", "6", "r5", "1"],
+    ["r5", "2", "led5", "a"],
+    ["led5", "c", "uno", "GND.5"]
+  ]
+}
