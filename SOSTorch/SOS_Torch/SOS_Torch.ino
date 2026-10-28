@@ -1,21 +1,17 @@
 //FURTHER READING: https://roboticsbackend.com/arduino-handle-multiple-leds-using-arrays-and-functions/
-#include <Arduino.h>
-
-#if 1  // #pragma region "Variables and arrays"
 /// @brief Total elements array is to contain.
 const byte _intLED = 5;
 
 /// @brief Each digit refers to pin ID on the UNO. 
 byte _intArrLEDPins[_intLED] = {2,3,4,5,6};
 
-#endif // #pragma endregion "Variables and arrays"
-
-#if 1  // #pragma region "Functions"
-
 /// @brief Sets all LEDS to OUTPUT.
+
 void initAllLEDs()
 {
+  Serial.println("initAllLEDs() called");
   for (int i = 0; i < _intLED; i++) {
+    Serial.println("initAllLEDs() for loop called");
     pinMode(_intArrLEDPins[i], OUTPUT);
   }
 }
@@ -27,7 +23,7 @@ void wait_for_serial()
   while (!Serial.available())
   {
     Serial.println("waiting for serial");
-    delay(1000);
+    delay(5000);
   };
 
   // Read everything from serial
@@ -39,19 +35,23 @@ void wait_for_serial()
 /// @param bolPowerOn Checks if LED High or Low. 
 void powerOnAllLEDs(bool bolPowerOn)
 {
+  Serial.println("powerOnAllLEDs(bool bolPowerOn) called.");
   int intShorter = 50;
   int intlonger = 150;
   //SHORT signal
   for (int i = 0; i < _intLED; i++) 
   {
+    Serial.println("Short for loop activated.");
     if (bolPowerOn) 
     {
+      Serial.println("if statement activated: "); Serial.println(bolPowerOn);
       digitalWrite(_intArrLEDPins[i], HIGH);
       delay(intShorter);
     }
 
     else 
     {
+      Serial.println("Else statement activated: "); Serial.println(bolPowerOn);
       digitalWrite(_intArrLEDPins[i], LOW);
       delay(intShorter);
     }    
@@ -59,32 +59,35 @@ void powerOnAllLEDs(bool bolPowerOn)
   //LONG signal
   for (int i = 0; i < _intLED; i++) 
   {
+    Serial.println("long for loop activated: "); Serial.println(bolPowerOn);
+
     if (bolPowerOn) 
     {
+      Serial.println("if statement activated: "); Serial.println(bolPowerOn);
       digitalWrite(_intArrLEDPins[i], HIGH);
       delay(intlonger);
     }
     
     else 
     {
+      Serial.println("Else statement activated: "); Serial.println(bolPowerOn);
       digitalWrite(_intArrLEDPins[i], LOW);
       delay(intlonger);
     }    
   }
 }
-#endif // #pragma endregion "Functions"
-
-#if 1  // #pragma region "Default Events"
 void setup() {
-  // put your setup code here, to run once:
+   // put your setup code here, to run once:
+   Serial.begin(115200);
+   Serial.println("setup() called");
   initAllLEDs();
 }
 
 void loop() {
+  Serial.println("loop() called");
   // put your main code here, to run repeatedly:
   powerOnAllLEDs(true);
-  wait_for_serial();
+  // wait_for_serial();
   powerOnAllLEDs(false);
-  wait_for_serial();
+  // wait_for_serial();
 }      
-#endif // #pragma endregion "Default Events"
