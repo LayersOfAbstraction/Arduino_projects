@@ -44,7 +44,7 @@ void powerOnAllLEDs(bool bolPowerOn)
     Serial.println("Short for loop activated.");
     if (bolPowerOn) 
     {
-      Serial.println("if statement activated: "); Serial.println(bolPowerOn);
+      Serial.println("if statement activated: " ); Serial.println(bolPowerOn);
       digitalWrite(_intArrLEDPins[i], HIGH);
       delay(intShorter);
     }
@@ -56,6 +56,9 @@ void powerOnAllLEDs(bool bolPowerOn)
       delay(intShorter);
     }    
   }
+  Serial.println("Short for loop complete.");
+  wait_for_serial();
+
   //LONG signal
   for (int i = 0; i < _intLED; i++) 
   {
@@ -75,6 +78,8 @@ void powerOnAllLEDs(bool bolPowerOn)
       delay(intlonger);
     }    
   }
+  Serial.println("Short for loop complete.");
+  wait_for_serial();
 }
 void setup() {
    // put your setup code here, to run once:
@@ -87,7 +92,7 @@ void loop() {
   Serial.println("loop() called");
   // put your main code here, to run repeatedly:
   powerOnAllLEDs(true);
-  // wait_for_serial();
+  wait_for_serial();
   powerOnAllLEDs(false);
-  // wait_for_serial();
+  wait_for_serial();
 }      
