@@ -1,4 +1,7 @@
-//FURTHER READING: https://roboticsbackend.com/arduino-handle-multiple-leds-using-arrays-and-functions/
+//FURTHER READING: roboticsbackend.com/arduino-handle-multiple-leds-using-arrays-and-functions/
+
+#include "Arduino.h"
+
 /// @brief Total elements array is to contain.
 const byte _intLED = 5;
 
@@ -31,54 +34,66 @@ void wait_for_serial()
   Serial.print("Read from serial:"); Serial.println(s);  
 }
 
-/// @brief Controls long & short signals of all LEDs
-/// @param bolPowerOn Checks if LED High or Low. 
+/// @brief Controls long & short signals of all LEDs. i = signal timer for long & short
+/// @param bolPowerOn Checks LED High or LOW. 
 void powerOnAllLEDs(bool bolPowerOn)
 {
   Serial.println("powerOnAllLEDs(bool bolPowerOn) called.");
   int intShorter = 50;
-  int intlonger = 150;
-  //SHORT signal
-  for (int i = 0; i < _intLED; i++) 
-  {
-    Serial.println("Short for loop activated.");
-    if (bolPowerOn) 
-    {
-      Serial.println("if statement activated: " ); Serial.println(bolPowerOn);
-      digitalWrite(_intArrLEDPins[i], HIGH);
-      delay(intShorter);
-    }
+  int intLonger = 150;
+  int intLongW = 1000;
+  int intSigCount = 3; 
 
-    else 
-    {
-      Serial.println("Else statement activated: "); Serial.println(bolPowerOn);
-      digitalWrite(_intArrLEDPins[i], LOW);
-      delay(intShorter);
-    }    
+  //SHORT signal
+  for (int x = 0; x < _intLED; x++)  
+  {      
+      Serial.println("Short for loop activated.");      
+      if (bolPowerOn) 
+      {        
+        Serial.println("if statement activated: " ); Serial.println(bolPowerOn);
+        for(int i = 0; i < intSigCount; i++)
+          Serial.println("Short for loop signal delay counter ON");
+          digitalWrite(_intArrLEDPins[x], HIGH);
+          delay(intShorter);
+      }
+      else 
+      {
+        Serial.println("Else statement activated: "); Serial.println(bolPowerOn);
+        for(int i = 0; i < intSigCount; i++)
+          Serial.println("Short for loop signal delay counter OFF");
+          digitalWrite(_intArrLEDPins[x], LOW);
+          delay(intShorter);
+      }    
   }
+  delay(intLongW);
   Serial.println("Short for loop complete.");
   wait_for_serial();
 
   //LONG signal
-  for (int i = 0; i < _intLED; i++) 
+  for (int y = 0; y < _intLED; y++) 
   {
     Serial.println("long for loop activated: "); Serial.println(bolPowerOn);
 
     if (bolPowerOn) 
     {
       Serial.println("if statement activated: "); Serial.println(bolPowerOn);
-      digitalWrite(_intArrLEDPins[i], HIGH);
-      delay(intlonger);
+      for(int i = 0; i < intSigCount; i++)
+        Serial.println("long for loop signal delay counter ON");
+        digitalWrite(_intArrLEDPins[y], HIGH);
+        delay(intLonger);
     }
     
     else 
     {
       Serial.println("Else statement activated: "); Serial.println(bolPowerOn);
-      digitalWrite(_intArrLEDPins[i], LOW);
-      delay(intlonger);
+      for(int i = 0; i < intSigCount; i++)
+        Serial.println("long for loop signal delay counter OFF");
+        digitalWrite(_intArrLEDPins[y], LOW);
+        delay(intLonger);
     }    
   }
-  Serial.println("Short for loop complete.");
+  delay(intLongW);
+  Serial.println("long for loop complete.");
   wait_for_serial();
 }
 void setup() {

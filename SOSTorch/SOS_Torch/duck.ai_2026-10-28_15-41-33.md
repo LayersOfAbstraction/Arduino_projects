@@ -5,7 +5,7 @@
 User prompt 1 of 1 - 10/28/2026, 3:40:35 PM:
 Making an SOS signal.
 We have 5 LEDs that have been initialized.
-Lets says I have 2 loops, one for the short and one for the long signal that loop through the 5 lights and IF an argument is set to true, we loop through through a byte array of all lights all turn them all on. ELSE we loop through the array and turn them all off. 
+Lets says I have 2 loops, one for the short and one for the long signal that loop through the 5 lights and IF an argument is set to true, we loop through through a byte array of all lights turn them all on. ELSE we loop through the array and turn them all off. 
 
 But also if we turn them on I want to be able to repeat the following 3 times for the short signal: 
 - Turn them off.
