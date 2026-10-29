@@ -1,4 +1,4 @@
-//FURTHER READING: roboticsbackend.com/arduino-handle-multiple-leds-using-arrays-and-functions/
+//FURTHER READING: https://roboticsbackend.com/arduino-handle-multiple-leds-using-arrays-and-functions/
 
 #include "Arduino.h"
 
@@ -34,42 +34,51 @@ void wait_for_serial()
   Serial.print("Read from serial:"); Serial.println(s);  
 }
 
-/// @brief Controls long & short signals of all LEDs. i = signal timer for long & short
+/// @brief Controls short signals of all LEDs.
 /// @param bolPowerOn Checks LED High or LOW. 
-void powerOnAllLEDs(bool bolPowerOn)
+void shortLEDcode(bool bolPowerOn)
 {
   Serial.println("powerOnAllLEDs(bool bolPowerOn) called.");
   int intShorter = 50;
-  int intLonger = 150;
-  int intLongW = 1000;
-  int intSigCount = 3; 
+  int intLongW = 1000;     
+  if (bolPowerOn) 
+  {
+    Serial.println("if statement activated: " ); Serial.println("true");
 
-  //SHORT signal
-  for (int x = 0; x < _intLED; x++)  
-  {      
-      Serial.println("Short for loop activated.");      
-      if (bolPowerOn) 
-      {        
-        Serial.println("if statement activated: " ); Serial.println(bolPowerOn);
-        for(int i = 0; i < intSigCount; i++)
-          Serial.println("Short for loop signal delay counter ON");
+    while(int intSigCount < 3)
+    {
+      Serial.println("short while loop activated. intSigCount=" + String(intSigCount) + "." ); Serial.println("true");
+
+      for (int x = 0; x < _intLED; x++)  
+      {            
           digitalWrite(_intArrLEDPins[x], HIGH);
-          delay(intShorter);
+          Serial.println("Short for loop array LED value: " + String(x) + " on.");
       }
-      else 
-      {
-        Serial.println("Else statement activated: "); Serial.println(bolPowerOn);
-        for(int i = 0; i < intSigCount; i++)
-          Serial.println("Short for loop signal delay counter OFF");
-          digitalWrite(_intArrLEDPins[x], LOW);
-          delay(intShorter);
-      }    
+      delay(intShorter);
+      intSigCount++;
+    }      
   }
+
+  else 
+  {
+    Serial.println("Else statement activated: "); Serial.println("false"); 
+    for (int y = 0; y < _intLED; y++)  
+    {      
+      digitalWrite(_intArrLEDPins[y], LOW);
+      Serial.println("Short for loop array LED value: " + String(y) + " off.");              
+    }
+  }      
   delay(intLongW);
   Serial.println("Short for loop complete.");
-  wait_for_serial();
+}
 
-  //LONG signal
+/// @brief Controls long signals of all LEDs.
+/// @param bolPowerOn Checks LED High or LOW. 
+void longLEDcode(bool bolPowerOn)
+{
+  int intLonger = 150;
+  int intLongW = 1000;
+
   for (int y = 0; y < _intLED; y++) 
   {
     Serial.println("long for loop activated: "); Serial.println(bolPowerOn);
@@ -78,24 +87,28 @@ void powerOnAllLEDs(bool bolPowerOn)
     {
       Serial.println("if statement activated: "); Serial.println(bolPowerOn);
       for(int i = 0; i < intSigCount; i++)
-        Serial.println("long for loop signal delay counter ON");
+      {
         digitalWrite(_intArrLEDPins[y], HIGH);
         delay(intLonger);
+        Serial.println("long for loop signal delay counter ON");
+      }
     }
     
     else 
     {
       Serial.println("Else statement activated: "); Serial.println(bolPowerOn);
       for(int i = 0; i < intSigCount; i++)
-        Serial.println("long for loop signal delay counter OFF");
+      {        
         digitalWrite(_intArrLEDPins[y], LOW);
         delay(intLonger);
+        Serial.println("long for loop signal delay counter OFF");
+      }
     }    
   }
   delay(intLongW);
   Serial.println("long for loop complete.");
-  wait_for_serial();
 }
+
 void setup() {
    // put your setup code here, to run once:
    Serial.begin(115200);
@@ -106,8 +119,11 @@ void setup() {
 void loop() {
   Serial.println("loop() called");
   // put your main code here, to run repeatedly:
-  powerOnAllLEDs(true);
+  shortLEDcode(true);
   wait_for_serial();
-  powerOnAllLEDs(false);
+  shortLEDcode(false);
   wait_for_serial();
+  longLEDcode(true);
+  wait_for_serial();
+  longLEDcode(false);
 }      
