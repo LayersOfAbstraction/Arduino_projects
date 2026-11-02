@@ -1,0 +1,202 @@
+﻿This conversation was generated with Duck.ai (https://duck.ai) using OpenAI's GPT-6 Luna Model. AI chats may display inaccurate or offensive information (see https://duckduckgo.com/duckai/privacy-terms for more info).
+
+====================
+
+User prompt 1 of 1 - 01/11/2026, 16:45:20:
+Newb coder making an SOS signal.
+We have 5 LEDs that have been initialised.
+Lets says I have 2 loops, one for the short singal for now that loop through the 5 lights and IF bool is true, we loop through a byte array of all lights turn them all on. ELSE we loop through the array and turn them all off. 
+
+If we turn them on I want to be able to repeat the following 3 times for the short signal: 
+- Turn LEDs on.
+- Delay for 50 milliseconds.
+- Turn LEDs off.
+
+//FURTHER READING: https://roboticsbackend.com/arduino-handle-multiple-leds-using-arrays-and-functions/
+
+#include "Arduino.h"
+
+/// @brief Total elements array is to contain.
+const byte _intLED = 5;
+
+/// @brief Each digit refers to pin ID on the UNO. 
+byte _intArrLEDPins[_intLED] = {2,3,4,5,6};
+
+/// @brief Sets all LEDS to OUTPUT.
+
+void initAllLEDs()
+{
+  Serial.println("initAllLEDs() called");
+  for (int i = 0; i < _intLED; i++) {
+    Serial.println("initAllLEDs() for loop called");
+    pinMode(_intArrLEDPins[i], OUTPUT);
+  }
+}
+
+/// @brief Pauses the code to analyse in Serial Monitor.
+void wait_for_serial()
+{
+  Serial.println("before wait serial");
+  while (!Serial.available())
+  {
+    Serial.println("waiting for serial");
+    delay(5000);
+  };
+
+  // Read everything from serial
+  String s = Serial.readString();
+  Serial.print("Read from serial:"); Serial.println(s);  
+}
+
+/// @brief Controls short signals of all LEDs.
+/// @param bolPowerOn Checks LED High or LOW. 
+void shortLEDcode(bool bolPowerOn)
+{
+  Serial.println("powerOnAllLEDs(bool bolPowerOn) called.");
+  int intShorter = 50;
+  int intLongW = 1000;     
+  if (bolPowerOn) 
+  {
+    Serial.println("if statement activated: " ); Serial.println("true");
+    
+    for (int x = 0; x < _intLED; x++)  
+    {            
+      digitalWrite(_intArrLEDPins[x], HIGH);
+      Serial.println("Short for loop array LED value: " + String(x) + " on.");
+    }
+    int intSigCount = 0;
+    while(intSigCount < 3)
+    {
+      //Consider using for in here and decrement sig counter inside?
+      Serial.println("short while loop activated. intSigCount=" + String(intSigCount) + "." ); Serial.println("true");
+      delay(intShorter);
+      intSigCount++;
+    }
+    Serial.println("while loop complete");      
+    wait_for_serial();    
+  }
+
+  else 
+  {
+    Serial.println("Else statement activated: "); Serial.println("false"); 
+    for (int y = 0; y < _intLED; y++)  
+    {      
+      digitalWrite(_intArrLEDPins[y], LOW);
+      Serial.println("Short for loop array LED value: " + String(y) + " off.");              
+    }
+  }      
+  delay(intLongW);
+  Serial.println("Short for loop complete.");
+}
+
+/// @brief Controls long signals of all LEDs.
+/// @param bolPowerOn Checks LED High or LOW. 
+// void longLEDcode(bool bolPowerOn)
+// {
+//   int intLonger = 150;
+//   int intLongW = 1000;
+
+//   for (int y = 0; y < _intLED; y++) 
+//   {
+//     Serial.println("long for loop activated: "); Serial.println(bolPowerOn);
+
+//     if (bolPowerOn) 
+//     {
+//       Serial.println("if statement activated: "); Serial.println(bolPowerOn);
+//       for(int i = 0; i < intSigCount; i++)
+//       {
+//         digitalWrite(_intArrLEDPins[y], HIGH);
+//         delay(intLonger);
+//         Serial.println("long for loop signal delay counter ON");
+//       }
+//     }
+    
+//     else 
+//     {
+//       Serial.println("Else statement activated: "); Serial.println(bolPowerOn);
+//       for(int i = 0; i < intSigCount; i++)
+//       {        
+//         digitalWrite(_intArrLEDPins[y], LOW);
+//         delay(intLonger);
+//         Serial.println("long for loop signal delay counter OFF");
+//       }
+//     }    
+//   }
+//   delay(intLongW);
+//   Serial.println("long for loop complete.");
+// }
+
+void setup() {
+   // put your setup code here, to run once:
+   Serial.begin(115200);
+   Serial.println("setup() called");
+  initAllLEDs();
+}
+
+void loop() {
+  Serial.println("loop() called");
+  // put your main code here, to run repeatedly:
+  shortLEDcode(true);
+  wait_for_serial();
+  shortLEDcode(false);
+  wait_for_serial();
+  // longLEDcode(true);
+  // wait_for_serial();
+  // longLEDcode(false);
+}      
+
+This is the serial output:
+
+S⸮⸮⸮⸮򐊶⸮4r⸮Ҧ⸮⸮⸮⸮ɚ⸮⸮p⸮ٚ⸮⸮⸮⸮⸮⸮⸮setup() called
+initAllLEDs() called
+initAllLEDs() for loop called
+initAllLEDs() for loop called
+initAllLEDs() for loop called
+initAllLEDs() for loop called
+initAllLEDs() for loop called
+loop() called
+powerOnAllLEDs(bool bolPowerOn) called.
+if statement activated: 
+true
+Short for loop array LED value: 0 on.
+Short for loop array LED value: 1 on.
+Short for loop array LED value: 2 on.
+Short for loop array LED value: 3 on.
+Short for loop array LED value: 4 on.
+short while loop activated. intSigCount=0.
+true
+short while loop activated. intSigCount=1.
+true
+short while loop activated. intSigCount=2.
+true
+while loop complete
+before wait serial
+waiting for serial
+
+
+As you can see we are while looping through the 5 LEDs, turning them on and not incrementing the delay. The lights don't obviously make that 50 milisecond blink which should be visible to the human eye. Wondering if I need to somehow in the same loop check if we have looped through all lights and SOS blink counter is less than 0? And if so set What could I be doing wrong? Help me troubleshoot without providing answer.
+
+GPT-6 Luna:
+<!--  -->
+<!-- **Investigating code structure**
+
+I need to note that a typo count condition increments from 0 and doesn’t decrement below 0. I shouldn't provide exact code but will outline numbered investigative steps for clarity. It seems a structured approach is beneficial here. First, I should consider removing waits and logs, specifically addressing `wait_for_serial` calls that may be blocking. 
+
+I’ll use `for` loops to turn on LEDs simultaneously, but at 50ms, they might appear briefly lit to the human eye. Also, `shortLEDcode(false)` should only run after the first function returns. It appears there’s a delay due to the function's structure.**Clarifying output issues**
+
+It's accurate to say that waiting for the serial output confirms the first blocker. The initial gibberish from the serial likely indicates a baud rate mismatch or startup noise, so I should set the monitor to 115200. I’ll reference `digitalWrite` and `delay` without mentioning source names. Also, I need to correct that "5 LED pins output is initialized" and consider that series resistors might not be necessary. Instead of revealing the full solution, I can offer self-debugging questions and keep textual hints for guidance. -->
+Your `while` loop is counting, but it isn’t blinking: **nothing inside it changes the LED pins**. The `for` loop sets every LED to `HIGH` once before the `while` begins, and they stay that way while the counter advances. `delay(50)` pauses the program; it doesn’t switch LEDs off by itself. A blink needs the output state to change during each repetition. [1,2]
+
+A few clues to trace through:
+
+- Follow the execution order after the LEDs are set `HIGH`. Which lines inside the `while` can change a pin to `LOW`?
+- Your first `wait_for_serial()` is inside the `true` branch. The output ending at “waiting for serial” means the program is paused there until serial input arrives. There’s another serial wait in `loop()` before the `false` call, so the off branch won’t run until you get past both waits.
+- Think of one blink as two states with a pause between them: **on → wait → off → wait**. Then ask yourself which part of the code should repeat that whole sequence three times.
+- The counter condition `< 3` is fine for three repetitions when it starts at zero. You don’t need to check whether it has gone below zero.
+- To isolate the LED timing, temporarily bypass the serial waits and reduce the serial logging; that lets you observe the blink sequence without input pauses.
+
+The garbled characters at the very start are a separate issue to check: make sure the Serial Monitor is set to the same baud rate as `Serial.begin(115200)`.
+
+Read More
+[1] digitalWrite() | Arduino Reference — https://arduinogetstarted.com/reference/digitalwrite
+[2] delay() | Arduino Reference — https://arduinogetstarted.com/reference/arduino-delay
