@@ -66,11 +66,11 @@ void shortLEDcode(bool bolPowerOn)
   }
 }
 
-/// @brief Controls long signals of all LEDs.
+/// @brief Turns long signals of all LEDs on, delays then goes off for humans to see.
 /// @param bolPowerOn Checks LED High or LOW. 
  void longLEDcode(bool bolPowerOn)
  {
-   int intLonger = 150;
+   int intLonger = 150;// 150 milliseconds appropriate for licensed radio operators.
    if (bolPowerOn)
    {
     Serial.println("if statement activated: " ); Serial.println("true");    
@@ -79,21 +79,19 @@ void shortLEDcode(bool bolPowerOn)
     while(intSigCount < 3)
     {
       Serial.println("short while loop activated. intSigCount=" + String(intSigCount) + "." ); Serial.println("true");      
-      //Turn each LED ON.
+      //Turn all LEDs ON.
       for(int i = 0; i < _intLED; i++)
       {
         digitalWrite(_intArrLEDPins[i], HIGH);        
         Serial.println("Short for loop array LED value: " + String(_intArrLEDPins[i]) + " on.");
       }
-      //Delay to show lights have gone ON for human HAM radio operators.
       delay(intLonger);      
-      //Turn ALL LEDs off
+      //Turn all LEDs off.
       for(int i = 0; i < _intLED; i++)
       {
         digitalWrite(_intArrLEDPins[i], LOW);        
         Serial.println("Long for loop array LED value: " + String(_intArrLEDPins[i]) + " off.");
       }      
-      //Delay to show lights have gone OFF for human HAM radio operators.
       delay(intLonger);
       intSigCount++;
     }
