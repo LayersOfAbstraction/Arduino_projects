@@ -2,19 +2,19 @@
 #include "Arduino.h"
 
 /// @brief Total elements array is to contain.
-const byte _intLED = 5;
+const byte _bytLED = 5;
 
 /// @brief 1 second delay
 int _intLongW = 1000;
 
 /// @brief Each digit refers to pin ID on the UNO. 
-byte _intArrLEDPins[_intLED] = {2,3,4,5,6};
+byte _intArrLEDPins[_bytLED] = {2,3,4,5,6};
 
 /// @brief Sets all LEDS's pinMode to OUTPUT.
 void initAllLEDs()
 {
   Serial.println("initAllLEDs() called");
-  for (int i = 0; i < _intLED; i++) {
+  for (int i = 0; i < _bytLED; i++) {
     Serial.println("initAllLEDs() for loop called");
     pinMode(_intArrLEDPins[i], OUTPUT);
   }
@@ -48,13 +48,13 @@ void shortLEDcode(bool bolPowerOn)
     while(intSigCount < 3)
     {
       Serial.println("short while loop activated. intSigCount=" + String(intSigCount) + "." ); Serial.println("true");      
-      for(int i = 0; i < _intLED; i++)
+      for(int i = 0; i < _bytLED; i++)
       {
         digitalWrite(_intArrLEDPins[i], HIGH);        
         Serial.println("Short for loop array LED value: " + String(_intArrLEDPins[i]) + " on.");
       }
       delay(intShorter);      
-      for(int i = 0; i < _intLED; i++)
+      for(int i = 0; i < _bytLED; i++)
       {
         digitalWrite(_intArrLEDPins[i], LOW);        
         Serial.println("Short for loop array LED value: " + String(_intArrLEDPins[i]) + " off.");
@@ -68,34 +68,31 @@ void shortLEDcode(bool bolPowerOn)
 
 /// @brief Turns long signals of all LEDs on, delays then goes off for humans to see.
 /// @param bolPowerOn Checks LED High or LOW. 
- void longLEDcode(bool bolPowerOn)
+ void longLEDcode()
  {
    int intLonger = 150;// 150 milliseconds appropriate for licensed radio operators.
-   if (bolPowerOn)
-   {
-    Serial.println("if statement activated: " ); Serial.println("true");    
-    int intSigCount = 0;
+   Serial.println("if statement activated: " ); Serial.println("true");    
+   int intSigCount = 0;
     //While Long SOS signal hasn't stopped.
     while(intSigCount < 3)
     {
       Serial.println("short while loop activated. intSigCount=" + String(intSigCount) + "." ); Serial.println("true");      
       //Turn all LEDs ON.
-      for(int i = 0; i < _intLED; i++)
+      for(int i = 0; i < _bytLED; i++)
       {
         digitalWrite(_intArrLEDPins[i], HIGH);        
         Serial.println("Short for loop array LED value: " + String(_intArrLEDPins[i]) + " on.");
       }
       delay(intLonger);      
       //Turn all LEDs off.
-      for(int i = 0; i < _intLED; i++)
+      for(int i = 0; i < _bytLED; i++)
       {
         digitalWrite(_intArrLEDPins[i], LOW);        
         Serial.println("Long for loop array LED value: " + String(_intArrLEDPins[i]) + " off.");
       }      
       delay(intLonger);
       intSigCount++;
-    }
-  }
+    }  
   Serial.println("Long for loop complete.");
 }
 
@@ -109,10 +106,8 @@ void setup() {
 void loop() {
   Serial.println("loop() called");
   // put your main code here, to run repeatedly:
-  shortLEDcode(true);
+  shortLEDcode();
   delay(_intLongW);
-  shortLEDcode(false);
-  longLEDcode(true);
-  delay(_intLongW);
-  longLEDcode(false);
+  longLEDcode();
+  delay(_intLongW);  
 }
