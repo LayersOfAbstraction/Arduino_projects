@@ -40,7 +40,8 @@ void wait_for_serial()
 void shortLEDcode()
 {
   Serial.println("shortLEDcode called.");
-  int intShorter = 50;     
+  int intShorter = 50; // 50 milliseconds appropriate for licensed radio operators.
+
   int intSigCount = 0;
 
   while(intSigCount < 3)
