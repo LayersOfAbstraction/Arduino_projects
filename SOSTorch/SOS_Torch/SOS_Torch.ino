@@ -37,33 +37,30 @@ void wait_for_serial()
 
 /// @brief Turns short signals of all LEDs on, delays then goes off for humans to see.
 /// @param bolPowerOn Checks LED High or LOW. 
-void shortLEDcode(bool bolPowerOn)
+void shortLEDcode()
 {
-  Serial.println("powerOnAllLEDs(bool bolPowerOn) called.");
-  int intShorter = 50;    
-  if (bolPowerOn)
+  Serial.println("shortLEDcode called.");
+  int intShorter = 50;     
+  int intSigCount = 0;
+
+  while(intSigCount < 3)
   {
-    Serial.println("if statement activated: " ); Serial.println("true");    
-    int intSigCount = 0;
-    while(intSigCount < 3)
+    Serial.println("Short while loop activated. intSigCount=" + String(intSigCount) + "." ); Serial.println("true");      
+    for(int i = 0; i < _bytLED; i++)
     {
-      Serial.println("short while loop activated. intSigCount=" + String(intSigCount) + "." ); Serial.println("true");      
-      for(int i = 0; i < _bytLED; i++)
-      {
-        digitalWrite(_intArrLEDPins[i], HIGH);        
-        Serial.println("Short for loop array LED value: " + String(_intArrLEDPins[i]) + " on.");
-      }
-      delay(intShorter);      
-      for(int i = 0; i < _bytLED; i++)
-      {
-        digitalWrite(_intArrLEDPins[i], LOW);        
-        Serial.println("Short for loop array LED value: " + String(_intArrLEDPins[i]) + " off.");
-      }      
-      delay(intShorter);
-      intSigCount++;
+      digitalWrite(_intArrLEDPins[i], HIGH);        
+      Serial.println("Short for loop array LED value: " + String(_intArrLEDPins[i]) + " on.");
     }
-    Serial.println("short while loop complete");
+    delay(intShorter);      
+    for(int i = 0; i < _bytLED; i++)
+    {
+      digitalWrite(_intArrLEDPins[i], LOW);        
+      Serial.println("Short for loop array LED value: " + String(_intArrLEDPins[i]) + " off.");
+    }      
+    delay(intShorter);
+    intSigCount++;
   }
+  Serial.println("Short while loop complete");
 }
 
 /// @brief Turns long signals of all LEDs on, delays then goes off for humans to see.
@@ -71,36 +68,36 @@ void shortLEDcode(bool bolPowerOn)
  void longLEDcode()
  {
    int intLonger = 150;// 150 milliseconds appropriate for licensed radio operators.
-   Serial.println("if statement activated: " ); Serial.println("true");    
    int intSigCount = 0;
-    //While Long SOS signal hasn't stopped.
-    while(intSigCount < 3)
-    {
-      Serial.println("short while loop activated. intSigCount=" + String(intSigCount) + "." ); Serial.println("true");      
-      //Turn all LEDs ON.
-      for(int i = 0; i < _bytLED; i++)
-      {
-        digitalWrite(_intArrLEDPins[i], HIGH);        
-        Serial.println("Short for loop array LED value: " + String(_intArrLEDPins[i]) + " on.");
-      }
-      delay(intLonger);      
-      //Turn all LEDs off.
-      for(int i = 0; i < _bytLED; i++)
-      {
-        digitalWrite(_intArrLEDPins[i], LOW);        
-        Serial.println("Long for loop array LED value: " + String(_intArrLEDPins[i]) + " off.");
-      }      
-      delay(intLonger);
-      intSigCount++;
-    }  
-  Serial.println("Long for loop complete.");
+
+   //While Long SOS signal hasn't stopped.
+   while(intSigCount < 3)
+   {
+     Serial.println("Long while loop activated. intSigCount=" + String(intSigCount) + "." ); Serial.println("true");      
+     //Turn all LEDs ON.
+     for(int i = 0; i < _bytLED; i++)
+     {
+       digitalWrite(_intArrLEDPins[i], HIGH);        
+       Serial.println("Long for loop array LED value: " + String(_intArrLEDPins[i]) + " on.");
+     }
+     delay(intLonger);      
+     //Turn all LEDs off.
+     for(int i = 0; i < _bytLED; i++)
+     {
+       digitalWrite(_intArrLEDPins[i], LOW);        
+       Serial.println("Long for loop array LED value: " + String(_intArrLEDPins[i]) + " off.");
+     }      
+     delay(intLonger);
+     intSigCount++;
+   }  
+   Serial.println("Long while loop complete.");
 }
 
 void setup() {
    // put your setup code here, to run once:
    Serial.begin(115200);
    Serial.println("setup() called");
-  initAllLEDs();
+   initAllLEDs();
 }
 
 void loop() {
