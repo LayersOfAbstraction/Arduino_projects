@@ -5,10 +5,10 @@
 const byte _bytLED = 5;
 
 /// @brief 1 second delay
-int _intLongW = 1000;
+const int _intLongW = 1000;
 
 /// @brief Each digit refers to pin ID on the UNO. 
-byte _intArrLEDPins[_bytLED] = {2,3,4,5,6};
+const byte _intArrLEDPins[_bytLED] = {2,3,4,5,6};
 
 /// @brief Sets all LEDS's pinMode to OUTPUT.
 void initAllLEDs()
@@ -68,7 +68,7 @@ void shortLEDcode()
 /// @param bolPowerOn Checks LED High or LOW. 
  void longLEDcode()
  {
-   int intLonger = 150;// 150 milliseconds appropriate for licensed radio operators.
+   const int intLonger = 150;// 150 milliseconds appropriate for licensed radio operators.
    int intSigCount = 0;
 
    //While Long SOS signal hasn't stopped.
