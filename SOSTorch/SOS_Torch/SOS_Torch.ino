@@ -74,7 +74,6 @@ void shortLEDcode()
    //While Long SOS signal hasn't stopped.
    while(intSigCount < 3)
    {
-<<<<<<< HEAD
      Serial.println("Long while loop activated. intSigCount=" + String(intSigCount) + "." ); Serial.println("true");      
      //Turn all LEDs ON.
      for(int i = 0; i < _bytLED; i++)
@@ -93,32 +92,6 @@ void shortLEDcode()
      intSigCount++;
    }  
    Serial.println("Long while loop complete.");
-=======
-    Serial.println("if statement activated: " ); Serial.println("true");    
-    int intSigCount = 0;
-    //While Long SOS signal hasn't stopped.
-    while(intSigCount < 3)
-    {
-      Serial.println("Long while loop activated. intSigCount=" + String(intSigCount) + "." ); Serial.println("true");      
-      //Turn all LEDs ON.
-      for(int i = 0; i < _intLED; i++)
-      {
-        digitalWrite(_intArrLEDPins[i], HIGH);        
-        Serial.println("Long for loop array LED value: " + String(_intArrLEDPins[i]) + " on.");
-      }
-      delay(intLonger);      
-      //Turn all LEDs off.
-      for(int i = 0; i < _intLED; i++)
-      {
-        digitalWrite(_intArrLEDPins[i], LOW);        
-        Serial.println("Long for loop array LED value: " + String(_intArrLEDPins[i]) + " off.");
-      }      
-      delay(intLonger);
-      intSigCount++;
-    }
-  }
-  Serial.println("Long for loop complete.");
->>>>>>> 45dd216 (Add new conversation.)
 }
 
 void setup() {
